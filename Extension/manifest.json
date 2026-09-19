@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Phishing URL Guard",
+  "version": "1.1",
+  "description": "Cảnh báo trang web lừa đảo bằng AI",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": ["tabs", "scripting", "storage"],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["warning.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
